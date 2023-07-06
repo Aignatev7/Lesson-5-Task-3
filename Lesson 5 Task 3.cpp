@@ -234,7 +234,7 @@ void print_info(Figure* f)
 }
 
 int main() {
-	setlocale(0, "");
+	setlocale(LC_ALL, "Russian");
 	Figure fig;
 	print_info(&fig);
 	Triangle tri;
