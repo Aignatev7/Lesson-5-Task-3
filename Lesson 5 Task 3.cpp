@@ -34,13 +34,15 @@ public:
 	virtual void print_myself() {
 		std::string correct = (check() ? "Правильная" : "Неправильная");
 		std::cout << get_figure_name() << ": \n" << correct << std::endl;
-		std::cout << "Количество сторон: " << get_number_of_sides() << "\n" << std::endl;
+		std::cout << "Количество сторон: " << get_number_of_sides() << "\n"
+			<< std::endl;
 	}
 };
 
 class Triangle : public Figure // класс Треугольник
 {
 protected:
+	int number_of_sides = 3;
 	int side_a = 0;
 	int side_b = 0;
 	int side_c = 0;
@@ -49,26 +51,20 @@ protected:
 	int corner_C = 0;
 
 public:
-	Triangle() {
+	Triangle() {}
+
+	Triangle(int a, int b, int c, int A, int B, int C) {
 		figure_name = "Треугольник";
 		number_of_sides = 3;
-		side_a = 10;
-		side_b = 20;
-		side_c = 30;
-		corner_A = 50;
-		corner_B = 60;
-		corner_C = 70;
+		this->side_a = a;
+		this->side_b = b;
+		this->side_c = c;
+		this->corner_A = A;
+		this->corner_B = B;
+		this->corner_C = C;
 	}
 
-	Triangle(int side_a, int side_b, int side_c, int corner_A, int corner_B, int corner_C) {
-		side_a = 0;
-		side_b = 0;
-		side_c = 0;
-		corner_A = 0;
-		corner_B = 0;
-		corner_C = 0;
-	}
-
+	int get_number_of_sides() { return number_of_sides; }
 	int get_side_a() { return side_a; }
 	int get_side_b() { return side_b; }
 	int get_side_c() { return side_c; }
@@ -99,17 +95,14 @@ public:
 class RightTriangle : public Triangle // класс Прямоугольный треугольник
 {
 public:
-	RightTriangle() {
+	RightTriangle(int a, int b, int c, int A, int B) {
 		figure_name = "Прямоугольный треугольник";
-		corner_C = 90;
-	}
-
-	RightTriangle(int side_a, int side_b, int side_c, int corner_A, int corner_B) {
-		// side_a = 0;
-		// side_b = 0;
-		// side_c = 0;
-		// corner_A = 0;
-		// corner_B = 0;
+		this->side_a = a;
+		this->side_b = b;
+		this->side_c = c;
+		this->corner_A = A;
+		this->corner_B = B;
+		this->corner_C = 90;
 	}
 
 	bool check() override {
@@ -128,23 +121,19 @@ public:
 class IsoscelesTriangle : public Triangle // класс Равнобедренный треугольник
 {
 public:
-	IsoscelesTriangle() {
+	IsoscelesTriangle(int b, int c, int B, int C) {
 		figure_name = "Равнобедренный треугольник";
-		side_a = side_c = 10;
-		corner_A = corner_C = 50;
+		this->side_a = this->side_c = c;
+		this->side_b = b;
+		this->corner_A = this->corner_C = C;
+		this->corner_B = B;
 	}
 
-	IsoscelesTriangle(int side_b, int side_c, int corner_B, int corner_C) {
-		side_a = side_c = 0;
-		side_b = 0;
-		corner_A = corner_C = 0;
-		corner_B = 0;
-	}
 	bool check() override {
 		if (!Triangle::check()) {
 			return false;
 		}
-		if ((side_a == side_c) && (corner_A == corner_C)) {
+		else if ((side_a == side_c) && (corner_A == corner_C)) {
 			return true;
 		}
 		else {
@@ -156,16 +145,12 @@ public:
 class EquilateralTriangle : public Triangle // класс Равносторонний треугольник
 {
 public:
-	EquilateralTriangle() {
+	EquilateralTriangle(int c) {
 		figure_name = "Равносторонний треугольник";
-		side_a = side_b = side_c = 30;
-		corner_A = corner_B = corner_C = 60;
+		this->side_a = this->side_b = this->side_c = c;
+		this->corner_A = this->corner_B = this->corner_C = 60;
 	}
 
-	EquilateralTriangle(int side_c, int corner_C) {
-		side_a = side_b = side_c = 0;
-		corner_A = corner_B = corner_C = 0;
-	}
 	bool check() override {
 		if (!Triangle::check()) {
 			return false;
@@ -183,6 +168,7 @@ public:
 class Quadrangle : public Figure // класс Четырёхугольник
 {
 protected:
+	int number_of_sides = 4;
 	int side_a = 0;
 	int side_b = 0;
 	int side_c = 0;
@@ -193,31 +179,21 @@ protected:
 	int corner_D = 0;
 
 public:
-	Quadrangle() {
+	Quadrangle() {}
+
+	Quadrangle(int a, int b, int c, int d, int A, int B, int C, int D) {
 		figure_name = "Четырёхугольник";
-		number_of_sides = 4;
-		side_a = 10;
-		side_b = 20;
-		side_c = 30;
-		side_d = 40;
-		corner_A = 50;
-		corner_B = 60;
-		corner_C = 70;
-		corner_D = 80;
+		this->side_a = a;
+		this->side_b = b;
+		this->side_c = c;
+		this->side_d = d;
+		this->corner_A = A;
+		this->corner_B = B;
+		this->corner_C = C;
+		this->corner_D = D;
 	}
 
-	Quadrangle(int side_a, int side_b, int side_c, int side_d, int corner_A,
-		int corner_B, int corner_C, int corner_D) {
-		side_a = 0;
-		side_b = 0;
-		side_c = 0;
-		side_d = 0;
-		corner_A = 0;
-		corner_B = 0;
-		corner_C = 0;
-		corner_D = 0;
-	}
-
+	int get_number_of_sides() { return number_of_sides; }
 	int get_side_a() { return side_a; }
 	int get_side_b() { return side_b; }
 	int get_side_c() { return side_c; }
@@ -251,48 +227,41 @@ public:
 class Rectangle : public Quadrangle // класс Прямоугольник
 {
 public:
-	Rectangle() {
-		figure_name = "Прямоугольник";
-		side_a = side_c = 10;
-		side_b = side_d = 20;
-		corner_A = corner_B = corner_C = corner_D = 90;
-	}
+	Rectangle() {}
 
-	Rectangle(int side_c, int side_d, int corner_D) {
-		side_a = side_c = 0;
-		side_b = side_d = 0;
-		corner_A = corner_B = corner_C = corner_D = 0;
+	Rectangle(int c, int d) {
+		figure_name = "Прямоугольник";
+		this->side_a = this->side_c = c;
+		this->side_b = this->side_d = d;
+		this->corner_A = this->corner_B = this->corner_C = this->corner_D = 90;
 	}
 
 	bool check() override {
 		if (!Quadrangle::check()) {
 			return false;
 		}
-		if (((side_a == side_c) && (side_b == side_d)) && (corner_A == corner_B == corner_C == corner_D == 90)) {
+		else if (((side_a == side_c) && (side_b == side_d)) &&
+			(corner_A == corner_B == corner_C == corner_D == 90)) {
 			return true;
 		}
 	}
 };
 
-class Square : public Quadrangle // класс Квадрат
+class Square : public Rectangle // класс Квадрат
 {
 public:
-	Square() {
+	Square(int d) {
 		figure_name = "Квадрат";
-		side_a = side_b = side_c = side_d = 20;
-		corner_A = corner_B = corner_C = corner_D = 90;
-	}
-
-	Square(int side_d, int corner_D) {
-		side_a = side_b = side_c = side_d = 0;
-		corner_A = corner_B = corner_C = corner_D = 0;
+		this->side_a = this->side_b = this->side_c = this->side_d = d;
+		this->corner_A = this->corner_B = this->corner_C = this->corner_D = 90;
 	}
 
 	bool check() override {
 		if (!Quadrangle::check()) {
 			return false;
 		}
-		if ((side_a == side_b == side_c == side_d) && (corner_A == corner_B == corner_C == corner_D == 90)) {
+		else if ((side_a == side_b == side_c == side_d) &&
+			(corner_A == corner_B == corner_C == corner_D == 90)) {
 			return true;
 		}
 		else {
@@ -304,26 +273,19 @@ public:
 class Parallelogram : public Quadrangle // класс Параллелограмм
 {
 public:
-	Parallelogram() {
+	Parallelogram(int c, int d, int C, int D) {
 		figure_name = "Параллелограмм";
-		side_a = side_c = 20;
-		side_b = side_d = 30;
-		corner_A = corner_C = 30;
-		corner_B = corner_D = 40;
-	}
-
-	Parallelogram(int side_c, int side_d, int corner_C, int corner_D) {
-		side_a = side_c = 0;
-		side_b = side_d = 0;
-		corner_A = corner_C = 0;
-		corner_B = corner_D = 0;
+		this->side_a = this->side_c = c;
+		this->side_b = this->side_d = d;
+		this->corner_A = this->corner_C = C;
+		this->corner_B = this->corner_D = D;
 	}
 
 	bool check() override {
 		if (!Quadrangle::check()) {
 			return false;
 		}
-		if (((side_a == side_c) && (side_b == side_d)) &&
+		else if (((side_a == side_c) && (side_b == side_d)) &&
 			((corner_A == corner_C) && (corner_B == corner_D))) {
 			return true;
 		}
@@ -336,24 +298,19 @@ public:
 class Rhomb : public Quadrangle // класс Ромб
 {
 public:
-	Rhomb() {
+	Rhomb(int d, int C, int D) {
 		figure_name = "Ромб";
-		side_a = side_b = side_c = side_d = 30;
-		corner_A = corner_C = 30;
-		corner_B = corner_D = 40;
-	}
-
-	Rhomb(int side_d, int corner_C, int corner_D) {
-		side_a = side_b = side_c = side_d = 30;
-		corner_A = corner_C = 30;
-		corner_B = corner_D = 40;
+		this->side_a = this->side_b = this->side_c = this->side_d = d;
+		this->corner_A = this->corner_C = C;
+		this->corner_B = this->corner_D = D;
 	}
 
 	bool check() override {
 		if (!Quadrangle::check()) {
 			return false;
 		}
-		if ((side_a == side_b == side_c == side_d) && ((corner_A == corner_C) && (corner_B == corner_D))) {
+		else if ((side_a == side_b == side_c == side_d) &&
+			((corner_A == corner_C) && (corner_B == corner_D))) {
 			return true;
 		}
 		else {
@@ -368,23 +325,32 @@ int main() {
 	setlocale(LC_ALL, "Russian");
 	Figure fig;
 	print_info(&fig);
-	Triangle tri;
+
+	Triangle tri(20, 30, 40, 55, 65, 60);
 	print_info(&tri);
-	RightTriangle rig_tri;
+
+	RightTriangle rig_tri(22, 32, 55, 45, 45);
 	print_info(&rig_tri);
-	IsoscelesTriangle isos_tri;
+
+	IsoscelesTriangle isos_tri(32, 44, 52, 62);
 	print_info(&isos_tri);
-	EquilateralTriangle eq_tri;
+
+	EquilateralTriangle eq_tri(62);
 	print_info(&eq_tri);
-	Quadrangle quad;
+
+	Quadrangle quad(12, 45, 89, 23, 65, 21, 20, 57);
 	print_info(&quad);
-	Rectangle rect;
+
+	Rectangle rect(79, 45);
 	print_info(&rect);
-	Square square;
+
+	Square square(45);
 	print_info(&square);
-	Parallelogram paral;
+
+	Parallelogram paral(45, 15, 84, 31);
 	print_info(&paral);
-	Rhomb rhomb;
+
+	Rhomb rhomb(15, 84, 31);
 	print_info(&rhomb);
 }
 
